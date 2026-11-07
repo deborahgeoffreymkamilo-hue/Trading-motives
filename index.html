@@ -6,14 +6,13 @@
 <title>101 — Keep Going Until 101</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <style>
-
 /* ══════════════════════════════════════════════
    101 — Cinematic Trading Experience
-   Aesthetic: Refined · Elegant · Quiet Power
-   Palette:   Espresso / Champagne / Dark Luxury
+   Music: Ludovico Einaudi - Experience
+   Aesthetic: Refined · Quiet Power · Fluid Pacing
 ══════════════════════════════════════════════ */
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -26,7 +25,6 @@
   --caramel: #A88462;
   --champ:   #D5C4AE;
   --silk:    #EDE0CE;
-  --charcoal:#4A4A46;
 }
 
 html, body {
@@ -39,16 +37,16 @@ html, body {
   cursor:none;
 }
 
-/* ── CURSOR — tiny champagne dot ── */
+/* ── CURSOR ── */
 #cursor {
   position:fixed;
   width:4px; height:4px;
-  background:rgba(213,196,174,0.5);
+  background:rgba(213,196,174,0.6);
   border-radius:50%;
   pointer-events:none;
   z-index:9999;
   transform:translate(-50%,-50%);
-  transition:transform .06s ease;
+  transition:transform .04s ease;
 }
 
 /* ── FADE OVERLAY ── */
@@ -59,21 +57,21 @@ html, body {
   will-change:opacity;
 }
 
-/* ── CINEMATIC BARS ── */
+/* ── CINEMATIC LETTERBOX BARS ── */
 .bar {
   position:fixed; left:0; right:0; z-index:72;
   background:#060402;
-  height:clamp(32px, 4.8vh, 62px);
+  height:clamp(28px, 4.5vh, 58px);
 }
 #bar-t { top:0; }
 #bar-b { bottom:0; }
 
-/* ── SUBTLE FILM GRAIN ── */
+/* ── FILM GRAIN ── */
 #grain {
   position:fixed; inset:0; z-index:65;
-  pointer-events:none; opacity:0.028;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain .12s steps(1) infinite;
+  pointer-events:none; opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain .1s steps(1) infinite;
 }
 @keyframes grain {
   0%,100%{ transform:translate(0,0) }
@@ -82,14 +80,14 @@ html, body {
   75%{ transform:translate(-1px,-1px) }
 }
 
-/* ── VIGNETTE — soft ellipse ── */
+/* ── VIGNETTE ── */
 #vignette {
   position:fixed; inset:0; z-index:62;
   pointer-events:none;
   background:radial-gradient(ellipse at center,
-    transparent 18%,
-    rgba(6,4,2,0.42) 60%,
-    rgba(6,4,2,0.90) 100%);
+    transparent 20%,
+    rgba(6,4,2,0.40) 62%,
+    rgba(6,4,2,0.92) 100%);
 }
 
 /* ── CANVASES ── */
@@ -108,17 +106,16 @@ html, body {
 }
 .mem-img {
   position:absolute;
-  width:min(600px, 86vw);
-  height:min(400px, 54vh);
+  width:min(580px, 86vw);
+  height:min(390px, 54vh);
   object-fit:cover;
   object-position:center;
   opacity:0;
-  /* Desaturated, cool-toned, moody — not raw / vivid */
-  filter:brightness(0.52) contrast(1.05) saturate(0.5) sepia(0.12);
+  filter:brightness(0.55) contrast(1.08) saturate(0.58) sepia(0.08);
   box-shadow:
-    0 0 160px rgba(6,4,2,0.99),
-    0 0 60px rgba(168,132,98,0.08);
-  border:1px solid rgba(168,132,98,0.06);
+    0 0 150px rgba(6,4,2,0.98),
+    0 0 50px rgba(168,132,98,0.08);
+  border:1px solid rgba(168,132,98,0.08);
   will-change:opacity,transform;
 }
 
@@ -133,194 +130,187 @@ html, body {
   position:absolute;
   text-align:center;
   opacity:0;
-  transform:translateY(14px);
+  transform:translateY(12px);
   pointer-events:none;
-  max-width:780px;
-  padding:0 48px;
+  max-width:800px;
+  padding:0 40px;
   will-change:opacity,transform;
 }
 
-/* Narrator voice — refined, intimate */
 .line.voice {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(18px, 2.4vw, 32px);
+  font-size:clamp(19px, 2.5vw, 34px);
   font-weight:300;
   font-style:italic;
   letter-spacing:0.04em;
-  line-height:1.85;
-  color:rgba(213,196,174,0.88);
-  text-shadow:0 0 90px rgba(168,132,98,0.22);
-}
-
-/* Non-italic strong voice */
-.line.voice-plain {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(18px, 2.4vw, 32px);
-  font-weight:400;
-  letter-spacing:0.06em;
-  line-height:1.8;
-  color:rgba(213,196,174,0.90);
+  line-height:1.75;
+  color:rgba(213,196,174,0.92);
   text-shadow:0 0 80px rgba(168,132,98,0.25);
 }
 
-/* The 101 — metallic, sculpted, not blocky */
+.line.voice-plain {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(19px, 2.5vw, 34px);
+  font-weight:400;
+  letter-spacing:0.06em;
+  line-height:1.75;
+  color:rgba(213,196,174,0.94);
+  text-shadow:0 0 70px rgba(168,132,98,0.28);
+}
+
 .line.t101 {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(90px, 20vw, 240px);
+  font-size:clamp(95px, 22vw, 250px);
   font-weight:600;
-  letter-spacing:0.08em;
+  letter-spacing:0.06em;
   line-height:0.88;
   color:transparent;
-  background:linear-gradient(148deg,
+  background:linear-gradient(145deg,
     #1A120E  0%,
     #3A2418 14%,
     #684A2E 28%,
     #A88462 42%,
     #D5C4AE 52%,
     #EDE0CE 56%,
-    #D5C4AE 60%,
-    #A88462 72%,
-    #684A2E 84%,
-    #3A2418 93%,
+    #D5C4AE 62%,
+    #A88462 74%,
+    #684A2E 86%,
+    #3A2418 94%,
     #1A120E 100%);
   -webkit-background-clip:text;
   background-clip:text;
-  filter:drop-shadow(0 2px 60px rgba(168,132,98,0.38));
+  filter:drop-shadow(0 2px 50px rgba(168,132,98,0.40));
 }
 
-/* Scripture — most elegant */
 .line.scripture {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(15px, 2vw, 26px);
+  font-size:clamp(16px, 2.1vw, 27px);
   font-weight:300;
   font-style:italic;
   letter-spacing:0.03em;
-  line-height:2.1;
-  color:rgba(213,196,174,0.85);
-  text-shadow:0 0 110px rgba(168,132,98,0.35);
+  line-height:2.0;
+  color:rgba(213,196,174,0.90);
+  text-shadow:0 0 100px rgba(168,132,98,0.35);
 }
 
-/* Final statement — spacious, refined caps */
 .line.statement {
   font-family:'Montserrat','Georgia',sans-serif;
-  font-size:clamp(13px, 2.2vw, 30px);
+  font-size:clamp(14px, 2.4vw, 32px);
   font-weight:200;
-  letter-spacing:0.38em;
+  letter-spacing:0.35em;
   text-transform:uppercase;
-  line-height:1.9;
-  color:rgba(213,196,174,0.88);
-  text-shadow:0 0 60px rgba(213,196,174,0.3);
+  line-height:1.8;
+  color:rgba(213,196,174,0.92);
+  text-shadow:0 0 50px rgba(213,196,174,0.35);
 }
 
-/* KEEP GOING — the climax */
 .line.climax {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(44px, 8.5vw, 108px);
-  font-weight:300;
-  letter-spacing:0.32em;
+  font-size:clamp(46px, 9vw, 112px);
+  font-weight:400;
+  letter-spacing:0.28em;
   text-transform:uppercase;
-  color:rgba(213,196,174,0.92);
-  text-shadow:0 0 90px rgba(213,196,174,0.4);
+  color:rgba(237,224,206,0.96);
+  text-shadow:0 0 80px rgba(213,196,174,0.45);
 }
 
-/* Small elegant label */
-.line.label {
+/* ── AUDIO TAP BANNER ── */
+#audio-prompt {
+  position:fixed;
+  inset:0;
+  z-index:90;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:rgba(6,4,2,0.85);
+  backdrop-filter:blur(10px);
+  cursor:pointer;
+  transition:opacity 0.8s ease, visibility 0.8s;
+}
+#audio-prompt.hidden {
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.prompt-btn {
   font-family:'Montserrat',sans-serif;
-  font-size:clamp(10px, 1.2vw, 14px);
-  font-weight:200;
-  letter-spacing:0.52em;
+  font-size:12px;
+  font-weight:300;
+  letter-spacing:0.4em;
   text-transform:uppercase;
-  color:rgba(168,132,98,0.6);
+  color:rgba(237,224,206,0.9);
+  border:1px solid rgba(168,132,98,0.4);
+  background:rgba(26,18,14,0.7);
+  padding:14px 34px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 0 50px rgba(168,132,98,0.15);
+  transition:all 0.3s ease;
+}
+.prompt-btn:hover {
+  border-color:rgba(237,224,206,0.8);
+  background:rgba(104,74,46,0.35);
+  transform:scale(1.03);
+}
+.prompt-sub {
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;
+  font-style:italic;
+  color:rgba(168,132,98,0.8);
+  margin-top:14px;
+  letter-spacing:0.08em;
 }
 
-/* ── CONTROLS — minimal ── */
+/* ── CONTROLS ── */
 #controls {
   position:fixed;
-  bottom:clamp(46px, 7.5vh, 84px);
-  right:24px;
+  bottom:clamp(38px, 6.5vh, 70px);
+  right:22px;
   z-index:95;
   display:flex; gap:9px;
-  opacity:0;
-  transition:opacity 0.5s;
+  opacity:0.35;
+  transition:opacity 0.4s;
 }
 #controls:hover { opacity:1 !important; }
 
 .ctrl {
   width:34px; height:34px;
-  border:1px solid rgba(168,132,98,0.25);
-  background:rgba(26,18,14,0.82);
-  color:rgba(213,196,174,0.65);
+  border:1px solid rgba(168,132,98,0.3);
+  background:rgba(26,18,14,0.85);
+  color:rgba(213,196,174,0.75);
   border-radius:50%;
   cursor:pointer;
   display:flex; align-items:center; justify-content:center;
   font-size:12px;
-  transition:all 0.4s ease;
-  backdrop-filter:blur(10px);
+  transition:all 0.3s ease;
+  backdrop-filter:blur(8px);
   pointer-events:all;
   user-select:none;
 }
 .ctrl:hover {
-  border-color:rgba(213,196,174,0.5);
-  color:var(--champ);
-  background:rgba(104,74,46,0.25);
+  border-color:rgba(213,196,174,0.6);
+  color:var(--silk);
+  background:rgba(104,74,46,0.3);
 }
 
-/* ── AUDIO HINT PILL ── */
-#audio-hint {
-  position:fixed;
-  top:clamp(18px, 3vh, 32px);
-  left:50%;
-  transform:translateX(-50%);
-  z-index:96;
-  font-family:'Montserrat',sans-serif;
-  font-size:11px;
-  font-weight:300;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:rgba(213,196,174,0.7);
-  background:rgba(26,18,14,0.65);
-  border:1px solid rgba(168,132,98,0.25);
-  padding:6px 18px;
-  border-radius:999px;
-  backdrop-filter:blur(8px);
-  pointer-events:none;
-  opacity:0;
-  transition:opacity 0.8s ease, transform 0.8s ease;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-#audio-hint.visible {
-  opacity:0.85;
-}
-.hint-dot {
-  width:5px;
-  height:5px;
-  background:rgba(213,196,174,0.7);
-  border-radius:50%;
-  animation:pulseDot 2s infinite ease-in-out;
-}
-@keyframes pulseDot {
-  0%,100%{ opacity:0.3; transform:scale(0.8); }
-  50%{ opacity:1; transform:scale(1.2); }
-}
-
-/* ── PROGRESS ── */
+/* ── PROGRESS BAR ── */
 #progress {
   position:fixed;
-  bottom:clamp(40px, 6vh, 70px);
+  bottom:clamp(34px, 5.5vh, 62px);
   left:50%; transform:translateX(-50%);
-  width:min(220px, 48vw);
-  height:1px;
-  background:rgba(74,74,70,0.22);
+  width:min(240px, 50vw);
+  height:1.5px;
+  background:rgba(74,74,70,0.25);
   z-index:95;
-  opacity:0;
-  transition:opacity 0.6s;
+  opacity:0.5;
 }
 #prog-fill {
   height:100%; width:0%;
-  background:linear-gradient(90deg, rgba(104,74,46,0.6), rgba(213,196,174,0.7));
-  transition:width 0.5s linear;
+  background:linear-gradient(90deg, rgba(104,74,46,0.7), rgba(213,196,174,0.85));
+  transition:width 0.3s linear;
 }
 
 </style>
@@ -339,50 +329,51 @@ html, body {
 <div id="mem-layer"></div>
 <div id="text-stage"></div>
 
-<div id="controls">
-  <button class="ctrl" id="btn-pause" title="Pause (Space)">⏸</button>
-  <button class="ctrl" id="btn-mute"  title="Sound (M)">🔊</button>
-  <button class="ctrl" id="btn-skip"  title="Skip (→)">⏭</button>
+<!-- Background Music: Ludovico Einaudi - Experience -->
+<audio id="bgm" src="experience.mp3" preload="auto" loop></audio>
+
+<!-- Tap anywhere for audio (browser requirement) -->
+<div id="audio-prompt">
+  <div class="prompt-btn">
+    <span>▶</span> Enter Experience
+  </div>
+  <div class="prompt-sub">Ludovico Einaudi — Experience</div>
 </div>
-<div id="audio-hint"><span class="hint-dot"></span>Tap anywhere for sound</div>
+
+<div id="controls">
+  <button class="ctrl" id="btn-pause" title="Pause / Play (Space)">⏸</button>
+  <button class="ctrl" id="btn-mute"  title="Sound (M)">🔊</button>
+  <button class="ctrl" id="btn-skip"  title="Fast Forward (→)">⏭</button>
+</div>
 <div id="progress"><div id="prog-fill"></div></div>
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   101 — Cinematic Experience Engine
-   Aesthetic: Elegant · Refined · Feminine Strength
-   Music:  Generative piano · Web Audio API · No files needed
-   Images: 15 real images from /images/ folder
+   101 — CINEMATIC TRADING MOTIVATION EXPERIENCE
+   Soundtrack: Ludovico Einaudi - Experience (Live)
+   Pacing: Crisp, poignant, dynamic emotional sync
 ══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
-  // ── State ──────────────────────────────────────────────
-  let isPaused    = false;
-  let isMuted     = false;
-  let audioStarted = false;
-  let audioCtx    = null;
-  let masterGain  = null;
-  let noteVol     = 0.025;
-  let chordIdx    = 0;
-  let dustMult    = 0.6;
+  // ── DOM REFS ──
+  const $bgm    = document.getElementById('bgm');
+  const $prompt = document.getElementById('audio-prompt');
+  const $btnPause = document.getElementById('btn-pause');
+  const $btnMute  = document.getElementById('btn-mute');
+  const $btnSkip  = document.getElementById('btn-skip');
+  const $progFill = document.getElementById('prog-fill');
+  const $cursor = document.getElementById('cursor');
+  const $fade   = document.getElementById('fade');
+  const $ts     = document.getElementById('text-stage');
+  const $mem    = document.getElementById('mem-layer');
 
-  // Canvas state
-  let s101Alpha   = 0;
-  let camZoom     = 0;
-  let camOffX     = 0;
-  let horizAlpha  = 0;
-  let stairOp     = 0;
-  let stairProg   = 0;
-  let stairLit    = false;
-
-  // ── Canvases ───────────────────────────────────────────
-  const $bg    = document.getElementById('bg-cvs');
-  const bgX    = $bg.getContext('2d');
-  const $st    = document.getElementById('stair-cvs');
-  const stX    = $st.getContext('2d');
-  const $du    = document.getElementById('dust-cvs');
-  const duX    = $du.getContext('2d');
+  const $bg = document.getElementById('bg-cvs');
+  const bgX = $bg.getContext('2d');
+  const $st = document.getElementById('stair-cvs');
+  const stX = $st.getContext('2d');
+  const $du = document.getElementById('dust-cvs');
+  const duX = $du.getContext('2d');
 
   function resize() {
     [$bg,$st,$du].forEach(c => {
@@ -393,503 +384,57 @@ html, body {
   window.addEventListener('resize', resize);
   resize();
 
-  // ── Cursor ─────────────────────────────────────────────
-  const $cursor = document.getElementById('cursor');
+  // ── CURSOR ──
   document.addEventListener('mousemove', e => {
     $cursor.style.left = e.clientX + 'px';
     $cursor.style.top  = e.clientY + 'px';
   });
 
-  // ══════════════════════════════════════════════════════
-  //  MUSIC — Generative Piano · Einaudi-inspired
-  //  Chord progression: Am9 → Fmaj9 → Cmaj7 → Gsus4
-  //  Soft, feminine, meditative, building
-  // ══════════════════════════════════════════════════════
-  const CHORDS = [
-    [57,60,64,67,72],   // Am9  — A C E G A(oct)
-    [53,57,60,65,69],   // Fmaj9 — F A C F A
-    [48,52,55,60,64],   // Cmaj7 — C E G C E
-    [55,60,62,67,69],   // Gsus4 — G C D G A
-  ];
+  // ── AUDIO CONTROL ──
+  let audioStarted = false;
+  let isMuted      = false;
+  let isPaused     = false;
 
-  function hz(midi){ return 440 * Math.pow(2,(midi-69)/12); }
-
-  function initAudio(){
-    if(audioStarted) return;
+  function startAudio() {
+    if (audioStarted) return;
     audioStarted = true;
-    try {
-      audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-      masterGain = audioCtx.createGain();
-      masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-
-      // Hall reverb
-      const conv = audioCtx.createConvolver();
-      const len  = audioCtx.sampleRate * 5;
-      const buf  = audioCtx.createBuffer(2, len, audioCtx.sampleRate);
-      for(let c=0;c<2;c++){
-        const d = buf.getChannelData(c);
-        for(let i=0;i<len;i++)
-          d[i] = (Math.random()*2-1) * Math.pow(1-i/len, 2.0);
-      }
-      conv.buffer = buf;
-
-      const dry = audioCtx.createGain(); dry.gain.value = 0.5;
-      const wet = audioCtx.createGain(); wet.gain.value = 0.5;
-      masterGain.connect(dry); dry.connect(audioCtx.destination);
-      masterGain.connect(conv); conv.connect(wet); wet.connect(audioCtx.destination);
-
-      masterGain.gain.linearRampToValueAtTime(0.16, audioCtx.currentTime+16);
-      arpLoop(0);
-    } catch(e){ console.warn('Audio unavailable'); }
-  }
-
-  function arpLoop(delayMs){
-    if(!audioCtx) return;
-    setTimeout(()=>{
-      const chord = CHORDS[chordIdx % CHORDS.length];
-      const beat  = 0.82; // slightly slower = more graceful
-      const now   = audioCtx.currentTime;
-
-      // Ascending arpeggio — gentle
-      chord.forEach((m,i)=>{
-        pianoNote(hz(m), now + i*beat, beat*3.0);
+    $prompt.classList.add('hidden');
+    $bgm.volume = 0;
+    const playPromise = $bgm.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Fade in volume smoothly over 3 seconds
+        gsap.to($bgm, { volume: 0.9, duration: 3, ease: 'power2.out' });
+      }).catch(err => {
+        console.log('Autoplay prevented, awaiting tap');
       });
-      // Soft bass (quieter than before)
-      bassNote(hz(chord[0]-12), now, beat*chord.length*1.05);
-
-      chordIdx++;
-      arpLoop((chord.length * beat * 1000) - 90);
-    }, delayMs);
-  }
-
-  function pianoNote(freq, when, dur){
-    if(!audioCtx||isMuted) return;
-    const o1 = audioCtx.createOscillator();
-    const o2 = audioCtx.createOscillator();
-    const g  = audioCtx.createGain();
-    const f  = audioCtx.createBiquadFilter();
-
-    o1.type='triangle'; o1.frequency.value = freq;
-    o2.type='sine';     o2.frequency.value = freq*2.001;
-    f.type='lowpass';   f.frequency.value=3000; f.Q.value=0.5;
-
-    o1.connect(f); o2.connect(f); f.connect(g); g.connect(masterGain);
-
-    // Softer attack, longer decay — feminine touch
-    g.gain.setValueAtTime(0, when);
-    g.gain.linearRampToValueAtTime(noteVol, when+0.018);
-    g.gain.exponentialRampToValueAtTime(noteVol*0.22, when+dur*0.4);
-    g.gain.exponentialRampToValueAtTime(0.00001, when+dur);
-
-    o1.start(when); o1.stop(when+dur);
-    o2.start(when); o2.stop(when+dur);
-  }
-
-  function bassNote(freq, when, dur){
-    if(!audioCtx||isMuted) return;
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    const f = audioCtx.createBiquadFilter();
-
-    o.type='sine'; o.frequency.value=freq;
-    f.type='lowpass'; f.frequency.value=160;
-    o.connect(f); f.connect(g); g.connect(masterGain);
-
-    g.gain.setValueAtTime(0,when);
-    g.gain.linearRampToValueAtTime(0.09,when+0.06);
-    g.gain.exponentialRampToValueAtTime(0.001,when+dur);
-    o.start(when); o.stop(when+dur);
-  }
-
-  function setLevel(lvl){
-    noteVol = 0.01 + lvl*0.075;
-    if(!audioCtx||!masterGain) return;
-    const t = isMuted ? 0 : Math.max(0.03, lvl*0.3);
-    masterGain.gain.linearRampToValueAtTime(t, audioCtx.currentTime+4);
-  }
-
-  // ══════════════════════════════════════════════════════
-  //  PARTICLES — Delicate gold flakes / champagne dust
-  // ══════════════════════════════════════════════════════
-  class Flake {
-    reset(){
-      this.x  = Math.random()*$du.width;
-      this.y  = Math.random()*$du.height;
-      this.sz = Math.random()*0.75 + 0.15;  // very fine
-      this.vx = (Math.random()-0.5)*0.18;
-      this.vy = -(Math.random()*0.28+0.04);
-      this.op = Math.random()*0.28 + 0.04;
-      this.life = 0;
-      this.max  = Math.random()*350+180;
-      // Warm champagne tones — not too yellow
-      const r = 180+Math.floor(Math.random()*45);
-      const g = 148+Math.floor(Math.random()*30);
-      const b = 100+Math.floor(Math.random()*25);
-      this.col=`rgb(${r},${g},${b})`;
-    }
-    constructor(){ this.reset(); this.life=Math.floor(Math.random()*200); }
-    tick(){
-      this.x+=this.vx; this.y+=this.vy; this.life++;
-      // Gentle sway
-      this.vx += (Math.random()-0.5)*0.02;
-      if(this.life>this.max||this.y<-5) this.reset();
-    }
-    draw(ctx){
-      const a = Math.sin((this.life/this.max)*Math.PI)*this.op*dustMult;
-      if(a<=0) return;
-      ctx.globalAlpha=Math.min(1,a);
-      ctx.fillStyle=this.col;
-      ctx.beginPath(); ctx.arc(this.x,this.y,this.sz,0,Math.PI*2); ctx.fill();
     }
   }
 
-  let flakes=[];
-  function initDust(){ flakes=Array.from({length:160},()=>new Flake()); }
-  function loopDust(){
-    duX.clearRect(0,0,$du.width,$du.height);
-    flakes.forEach(p=>{p.tick();p.draw(duX);});
-    requestAnimationFrame(loopDust);
-  }
+  $prompt.addEventListener('click', startAudio);
+  window.addEventListener('pointerdown', startAudio, { once: true });
+  window.addEventListener('keydown', startAudio, { once: true });
 
-  // ══════════════════════════════════════════════════════
-  //  BACKGROUND — Void / Metallic 101 / Horizon
-  // ══════════════════════════════════════════════════════
-  function loopBG(){
-    const W=$bg.width, H=$bg.height;
-    bgX.fillStyle='#060402';
-    bgX.fillRect(0,0,W,H);
-
-    // Warm void breath — very subtle
-    const vg=bgX.createRadialGradient(W/2,H*0.54,0,W/2,H*0.54,W*0.42);
-    vg.addColorStop(0,'rgba(104,74,46,0.055)');
-    vg.addColorStop(1,'rgba(0,0,0,0)');
-    bgX.fillStyle=vg; bgX.fillRect(0,0,W,H);
-
-    if(s101Alpha>0) draw101(W,H);
-    if(horizAlpha>0) drawHorizon(W,H);
-
-    requestAnimationFrame(loopBG);
-  }
-
-  function draw101(W,H){
-    const cx=W/2+camOffX, cy=H/2;
-    // Cormorant Garamond weight 600 — elegant, not blocky
-    const fs=Math.min(W*0.26,H*0.36)*(1+camZoom*0.26);
-
-    bgX.save();
-    bgX.globalAlpha=s101Alpha;
-    bgX.font=`600 ${fs}px 'Cormorant Garamond','Georgia',serif`;
-    bgX.textAlign='center'; bgX.textBaseline='middle';
-
-    // Metallic gradient — refined, not garish
-    const mg=bgX.createLinearGradient(cx-fs*0.6,cy-fs*0.48,cx+fs*0.6,cy+fs*0.48);
-    mg.addColorStop(0,   '#1A120E');
-    mg.addColorStop(0.10,'#3A2418');
-    mg.addColorStop(0.25,'#684A2E');
-    mg.addColorStop(0.42,'#A88462');
-    mg.addColorStop(0.52,'#D5C4AE');
-    mg.addColorStop(0.57,'#EDE0CE');
-    mg.addColorStop(0.62,'#D5C4AE');
-    mg.addColorStop(0.74,'#A88462');
-    mg.addColorStop(0.88,'#684A2E');
-    mg.addColorStop(0.97,'#3A2418');
-    mg.addColorStop(1,   '#1A120E');
-
-    bgX.shadowBlur  = 80;
-    bgX.shadowColor = `rgba(168,132,98,${s101Alpha*0.45})`;
-    bgX.fillStyle   = mg;
-    bgX.fillText('101',cx,cy);
-
-    // Delicate light shimmer
-    const sh=bgX.createLinearGradient(cx-fs*0.55,cy-fs*0.38,cx+fs*0.55,cy);
-    sh.addColorStop(0,`rgba(237,224,206,0)`);
-    sh.addColorStop(0.42,`rgba(237,224,206,${s101Alpha*0.07})`);
-    sh.addColorStop(0.58,`rgba(255,250,245,${s101Alpha*0.09})`);
-    sh.addColorStop(1,`rgba(213,196,174,0)`);
-    bgX.shadowBlur=0;
-    bgX.fillStyle=sh; bgX.fillText('101',cx,cy);
-
-    bgX.restore();
-  }
-
-  function drawHorizon(W,H){
-    bgX.save(); bgX.globalAlpha=horizAlpha;
-
-    const sky=bgX.createLinearGradient(0,0,0,H);
-    sky.addColorStop(0,   '#060402');
-    sky.addColorStop(0.30,'#1A120E');
-    sky.addColorStop(0.58,'#3A2418');
-    sky.addColorStop(0.70,'#684A2E');
-    sky.addColorStop(0.80,'#A88462');
-    sky.addColorStop(0.88,'#D5C4AE');
-    sky.addColorStop(1,   '#A88462');
-    bgX.fillStyle=sky; bgX.fillRect(0,0,W,H);
-
-    const gY=H*0.70;
-
-    // Sunrise glow — soft, warm
-    const sg=bgX.createRadialGradient(W*0.5,gY,0,W*0.5,gY,W*0.6);
-    sg.addColorStop(0,'rgba(237,224,206,0.52)');
-    sg.addColorStop(0.08,'rgba(213,196,174,0.32)');
-    sg.addColorStop(0.28,'rgba(168,132,98,0.10)');
-    sg.addColorStop(1,'rgba(6,4,2,0)');
-    bgX.fillStyle=sg; bgX.fillRect(0,0,W,H);
-
-    // City silhouette — slender buildings
-    bgX.fillStyle='#060402';
-    [[0.02,0.42,0.06,0.28],[0.09,0.55,0.04,0.15],[0.14,0.30,0.08,0.40],
-     [0.23,0.58,0.06,0.12],[0.30,0.24,0.10,0.46],[0.41,0.46,0.05,0.24],
-     [0.47,0.20,0.10,0.50],[0.58,0.48,0.06,0.22],[0.65,0.34,0.07,0.36],
-     [0.73,0.56,0.07,0.14],[0.81,0.42,0.08,0.28],[0.90,0.52,0.06,0.18]
-    ].forEach(([x,t,w,h])=>{
-      bgX.fillRect(x*W,t*H,w*W,h*H);
-      bgX.fillStyle='rgba(213,196,174,0.045)';
-      for(let wx=x*W+3;wx<(x+w)*W-3;wx+=7)
-        for(let wy=t*H+9;wy<(t+h)*H-5;wy+=10)
-          if(Math.random()<0.28) bgX.fillRect(wx,wy,3,4);
-      bgX.fillStyle='#060402';
-    });
-    bgX.fillRect(0,gY,W,H-gY);
-
-    // Solitary figure — slight, feminine posture
-    const fx=W*0.5, fh=H*0.10;
-    bgX.fillStyle='#040301';
-    bgX.fillRect(fx-3,gY-fh,6,fh*0.70);
-    bgX.beginPath(); bgX.arc(fx,gY-fh,6.5,0,Math.PI*2); bgX.fill();
-    bgX.save();
-    bgX.strokeStyle='#040301'; bgX.lineWidth=2.5; bgX.lineCap='round';
-    bgX.beginPath();
-    bgX.moveTo(fx-3,gY-fh*0.52); bgX.lineTo(fx-16,gY-fh*0.60);
-    bgX.moveTo(fx+3,gY-fh*0.52); bgX.lineTo(fx+16,gY-fh*0.60);
-    bgX.stroke();
-    bgX.restore();
-
-    bgX.restore();
-  }
-
-  // ══════════════════════════════════════════════════════
-  //  STAIRCASE — Rendered on canvas
-  //  Most steps dark. Uncertainty. Quiet climb.
-  // ══════════════════════════════════════════════════════
-  const STEP_WORDS=[
-    'LOSS','DOUBT','FEAR','MISSED ENTRY','STOP LOSS',
-    'FAILURE','OVERTRADING','REVENGE TRADE',
-    'MISSED OPPORTUNITY','AGAIN','BREAKDOWN','RESET','PAIN','REPEAT',
-  ];
-
-  function loopStair(){
-    stX.clearRect(0,0,$st.width,$st.height);
-
-    if(stairOp>0.01){
-      const W=$st.width, H=$st.height;
-      const cx=W/2, vanY=H*0.14, baseY=H*0.96;
-
-      for(let i=101;i>=0;i--){
-        const t=i/101;
-        const adj=t+stairProg*0.80;
-        if(adj>1.03) continue;
-        const tc=Math.min(adj,1);
-        const y =vanY+(baseY-vanY)*Math.pow(tc,0.57);
-        const sw=W*0.04+W*0.54*Math.pow(tc,0.70);
-        const sh=1+22*Math.pow(tc,0.80);
-
-        let bright=0;
-        if(stairLit){
-          bright=0.28+(1-t)*0.48;
-        } else if(i===0&&stairProg>0.88){
-          bright=1.4; // 101st step — golden sacred
-        } else {
-          bright=0.018+(Math.random()<0.0025?0.05:0);
-        }
-
-        const a=Math.min(1,bright*stairOp);
-        stX.shadowBlur=0;
-
-        if(i===0&&stairProg>0.88&&!stairLit){
-          const gg=stX.createLinearGradient(cx-sw/2,y,cx+sw/2,y+sh);
-          gg.addColorStop(0,`rgba(168,132,98,${a*0.65})`);
-          gg.addColorStop(0.5,`rgba(237,224,206,${a})`);
-          gg.addColorStop(1,`rgba(104,74,46,${a*0.35})`);
-          stX.fillStyle=gg;
-          stX.shadowBlur=100; stX.shadowColor=`rgba(237,224,206,${a*0.9})`;
-        } else if(stairLit){
-          const br=Math.floor(bright*85);
-          stX.fillStyle=`rgba(${br},${Math.floor(br*0.68)},${Math.floor(br*0.36)},${stairOp})`;
-        } else {
-          const br=Math.floor(bright*55);
-          stX.fillStyle=`rgba(${br},${Math.floor(br*0.68)},${Math.floor(br*0.35)},${stairOp*0.95})`;
-        }
-
-        stX.fillRect(cx-sw/2,y,sw,Math.max(1,sh));
-        stX.shadowBlur=0;
-
-        // Slim edge highlight
-        stX.fillStyle=`rgba(168,132,98,${a*0.10})`;
-        stX.fillRect(cx-sw/2,y,sw,0.8);
-
-        // Step word — whisper thin
-        if(i>0&&i<101&&adj>0.07&&adj<0.94){
-          const wa=stairLit?0.20:0.055;
-          const fs2=Math.max(4.5,sh*0.58);
-          stX.font=`300 ${fs2}px 'Cormorant Garamond',serif`;
-          stX.fillStyle=`rgba(85,60,38,${wa*stairOp})`;
-          stX.textAlign='center';
-          stX.fillText(STEP_WORDS[i%STEP_WORDS.length],cx,y+sh-0.8);
-        }
-      }
-
-      // Fog cap — mystery above
-      const fog=stX.createLinearGradient(0,0,0,H*0.44);
-      fog.addColorStop(0,`rgba(6,4,2,${stairOp})`);
-      fog.addColorStop(1,'rgba(6,4,2,0)');
-      stX.fillStyle=fog; stX.fillRect(0,0,W,H*0.44);
-
-      // Vanishing-point glow — the first light
-      if(stairProg>0.20){
-        const glA=((stairProg-0.20)/0.80)*0.44*stairOp;
-        const rg=stX.createRadialGradient(cx,vanY+22,0,cx,vanY+22,160);
-        rg.addColorStop(0,`rgba(237,224,206,${glA})`);
-        rg.addColorStop(0.4,`rgba(168,132,98,${glA*0.45})`);
-        rg.addColorStop(1,'rgba(6,4,2,0)');
-        stX.fillStyle=rg; stX.fillRect(cx-160,vanY-25,320,185);
-      }
-    }
-
-    requestAnimationFrame(loopStair);
-  }
-
-  // ══════════════════════════════════════════════════════
-  //  UTILS
-  // ══════════════════════════════════════════════════════
-  function sleep(ms){
-    return new Promise(r=>{
-      function check(){ if(!isPaused) return r(); setTimeout(check,80); }
-      setTimeout(check,ms);
-    });
-  }
-  const lerp=(a,b,t)=>a+(b-a)*t;
-  const eio=t=>t<0.5?2*t*t:-1+(4-2*t)*t;
-  const eo3=t=>1-Math.pow(1-t,3);
-  const ei3=t=>t*t*t;
-
-  function animProp(setter,from,to,ms,ease=t=>t){
-    return new Promise(r=>{
-      const s=performance.now();
-      function tick(n){
-        const t=Math.min(1,(n-s)/ms);
-        setter(lerp(from,to,ease(t)));
-        t<1 ? requestAnimationFrame(tick) : r();
-      }
-      requestAnimationFrame(tick);
-    });
-  }
-
-  // ── Fades ──
-  const $fade=document.getElementById('fade');
-  function fadeTo(op,ms=2000){
-    return new Promise(r=>gsap.to($fade,{opacity:op,duration:ms/1000,ease:'power2.inOut',onComplete:r}));
-  }
-  const fadeIn=(ms=2000)=>fadeTo(0,ms);
-  const fadeOut=(ms=2000)=>fadeTo(1,ms);
-
-  // ── Text ──
-  const $ts=document.getElementById('text-stage');
-
-  function showLine(html,cls,visMs,delayMs=0){
-    return new Promise(r=>{
-      setTimeout(()=>{
-        const el=document.createElement('div');
-        el.className='line '+cls;
-        el.innerHTML=html;
-        $ts.appendChild(el);
-        gsap.to(el,{opacity:1,y:0,duration:1.9,ease:'power2.out'});
-        setTimeout(()=>{
-          gsap.to(el,{opacity:0,duration:2.4,ease:'power2.inOut',
-            onComplete:()=>{el.remove();r();}});
-        },visMs-2400);
-      },delayMs);
-    });
-  }
-
-  function clearLines(fast=false){
-    document.querySelectorAll('.line').forEach(el=>{
-      gsap.to(el,{opacity:0,duration:fast?0.4:1.1,
-        onComplete:()=>el.remove()});
-    });
-  }
-
-  // ── Images ──
-  const $mem=document.getElementById('mem-layer');
-
-  function showImage(src,visMs,delayMs=0){
-    return new Promise(r=>{
-      setTimeout(()=>{
-        const img=document.createElement('img');
-        img.className='mem-img'; img.src=src; img.alt='';
-        $mem.appendChild(img);
-        gsap.fromTo(img,
-          {opacity:0,scale:1.0},
-          {opacity:0.88,scale:1.04,duration:2.6,ease:'power2.out'}
-        );
-        setTimeout(()=>{
-          gsap.to(img,{opacity:0,duration:3.0,ease:'power2.inOut',
-            onComplete:()=>{img.remove();r();}});
-        },visMs-3000);
-      },delayMs);
-    });
-  }
-
-  // ── Progress ──
-  const $pf=document.getElementById('prog-fill');
-  const TOTAL_S=430;
-  let filmStart=null;
-  setInterval(()=>{
-    if(!filmStart)return;
-    $pf.style.width=Math.min(100,((Date.now()-filmStart)/1000/TOTAL_S)*100)+'%';
-  },500);
-
-  // ── Controls & UX Listeners ──
-  const $btnPause = document.getElementById('btn-pause');
-  const $btnMute  = document.getElementById('btn-mute');
-  const $hint     = document.getElementById('audio-hint');
+  // Try immediate autoplay (works on configured browsers)
+  startAudio();
 
   function togglePause() {
     isPaused = !isPaused;
     $btnPause.textContent = isPaused ? '▶' : '⏸';
-    if (audioCtx) isPaused ? audioCtx.suspend() : audioCtx.resume();
+    if (isPaused) $bgm.pause();
+    else if (audioStarted) $bgm.play();
   }
 
   function toggleMute() {
     isMuted = !isMuted;
     $btnMute.textContent = isMuted ? '🔇' : '🔊';
-    if (masterGain && audioCtx) {
-      masterGain.gain.linearRampToValueAtTime(isMuted ? 0 : 0.18, audioCtx.currentTime + 1);
-    }
+    $bgm.muted = isMuted;
   }
 
   $btnPause.addEventListener('click', togglePause);
   $btnMute.addEventListener('click', toggleMute);
 
-  // Audio gesture hint & first user interaction
-  setTimeout(() => {
-    if (!audioStarted && $hint) $hint.classList.add('visible');
-  }, 2000);
-
-  function dismissHint() {
-    if ($hint) {
-      $hint.classList.remove('visible');
-      setTimeout(() => $hint.remove(), 1000);
-    }
-  }
-
-  window.addEventListener('pointerdown', () => {
-    initAudio();
-    dismissHint();
-  }, { once: true });
-
   window.addEventListener('keydown', e => {
-    initAudio();
-    dismissHint();
     if (e.code === 'Space') {
       e.preventDefault();
       togglePause();
@@ -899,24 +444,325 @@ html, body {
     }
   });
 
-  // UI/UX Pro Max Motion Rule: Pause on tab hidden, resume smoothly on tab visible
+  // Auto pause when tab hidden
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-      if (audioCtx && audioCtx.state === 'running') audioCtx.suspend();
+      if (!$bgm.paused) $bgm.pause();
     } else {
-      if (audioCtx && !isPaused && audioCtx.state === 'suspended') audioCtx.resume();
+      if (audioStarted && !isPaused) $bgm.play();
     }
   });
 
-  setTimeout(()=>{
-    document.getElementById('controls').style.opacity='0.28';
-    document.getElementById('progress').style.opacity='0.55';
-  },10000);
+  // ── DUST PARTICLES ──
+  let dustMult = 0.6;
+  class Flake {
+    reset() {
+      this.x  = Math.random() * $du.width;
+      this.y  = Math.random() * $du.height;
+      this.sz = Math.random() * 0.75 + 0.15;
+      this.vx = (Math.random() - 0.5) * 0.18;
+      this.vy = -(Math.random() * 0.28 + 0.04);
+      this.op = Math.random() * 0.28 + 0.04;
+      this.life = 0;
+      this.max  = Math.random() * 300 + 150;
+      const r = 180 + Math.floor(Math.random() * 45);
+      const g = 148 + Math.floor(Math.random() * 30);
+      const b = 100 + Math.floor(Math.random() * 25);
+      this.col = `rgb(${r},${g},${b})`;
+    }
+    constructor() { this.reset(); this.life = Math.floor(Math.random() * 150); }
+    tick() {
+      this.x += this.vx; this.y += this.vy; this.life++;
+      this.vx += (Math.random() - 0.5) * 0.02;
+      if (this.life > this.max || this.y < -5) this.reset();
+    }
+    draw(ctx) {
+      const a = Math.sin((this.life / this.max) * Math.PI) * this.op * dustMult;
+      if (a <= 0) return;
+      ctx.globalAlpha = Math.min(1, a);
+      ctx.fillStyle = this.col;
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.sz, 0, Math.PI * 2); ctx.fill();
+    }
+  }
 
-  // ══════════════════════════════════════════════════════
-  //  IMAGE PATHS
-  // ══════════════════════════════════════════════════════
-  const IMG={
+  const flakes = Array.from({ length: 150 }, () => new Flake());
+  function loopDust() {
+    duX.clearRect(0, 0, $du.width, $du.height);
+    flakes.forEach(p => { p.tick(); p.draw(duX); });
+    requestAnimationFrame(loopDust);
+  }
+
+  // ── BACKGROUND CANVAS (Void / 101 / Horizon) ──
+  let s101Alpha  = 0;
+  let camZoom    = 0;
+  let camOffX    = 0;
+  let horizAlpha = 0;
+
+  function loopBG() {
+    const W = $bg.width, H = $bg.height;
+    bgX.fillStyle = '#060402';
+    bgX.fillRect(0, 0, W, H);
+
+    // Warm breath
+    const vg = bgX.createRadialGradient(W/2, H*0.54, 0, W/2, H*0.54, W*0.42);
+    vg.addColorStop(0, 'rgba(104,74,46,0.06)');
+    vg.addColorStop(1, 'rgba(0,0,0,0)');
+    bgX.fillStyle = vg; bgX.fillRect(0, 0, W, H);
+
+    if (s101Alpha > 0) draw101(W, H);
+    if (horizAlpha > 0) drawHorizon(W, H);
+
+    requestAnimationFrame(loopBG);
+  }
+
+  function draw101(W, H) {
+    const cx = W / 2 + camOffX, cy = H / 2;
+    const fs = Math.min(W * 0.27, H * 0.38) * (1 + camZoom * 0.26);
+
+    bgX.save();
+    bgX.globalAlpha = s101Alpha;
+    bgX.font = `600 ${fs}px 'Cormorant Garamond','Georgia',serif`;
+    bgX.textAlign = 'center'; bgX.textBaseline = 'middle';
+
+    const mg = bgX.createLinearGradient(cx - fs*0.6, cy - fs*0.48, cx + fs*0.6, cy + fs*0.48);
+    mg.addColorStop(0,   '#1A120E');
+    mg.addColorStop(0.12,'#3A2418');
+    mg.addColorStop(0.26,'#684A2E');
+    mg.addColorStop(0.42,'#A88462');
+    mg.addColorStop(0.52,'#D5C4AE');
+    mg.addColorStop(0.58,'#EDE0CE');
+    mg.addColorStop(0.64,'#D5C4AE');
+    mg.addColorStop(0.76,'#A88462');
+    mg.addColorStop(0.88,'#684A2E');
+    mg.addColorStop(0.96,'#3A2418');
+    mg.addColorStop(1,   '#1A120E');
+
+    bgX.shadowBlur  = 70;
+    bgX.shadowColor = `rgba(168,132,98,${s101Alpha * 0.45})`;
+    bgX.fillStyle   = mg;
+    bgX.fillText('101', cx, cy);
+
+    bgX.restore();
+  }
+
+  function drawHorizon(W, H) {
+    bgX.save(); bgX.globalAlpha = horizAlpha;
+
+    const sky = bgX.createLinearGradient(0, 0, 0, H);
+    sky.addColorStop(0,   '#060402');
+    sky.addColorStop(0.30,'#1A120E');
+    sky.addColorStop(0.58,'#3A2418');
+    sky.addColorStop(0.70,'#684A2E');
+    sky.addColorStop(0.80,'#A88462');
+    sky.addColorStop(0.88,'#D5C4AE');
+    sky.addColorStop(1,   '#A88462');
+    bgX.fillStyle = sky; bgX.fillRect(0, 0, W, H);
+
+    const gY = H * 0.70;
+    const sg = bgX.createRadialGradient(W*0.5, gY, 0, W*0.5, gY, W*0.6);
+    sg.addColorStop(0,    'rgba(237,224,206,0.55)');
+    sg.addColorStop(0.08, 'rgba(213,196,174,0.34)');
+    sg.addColorStop(0.28, 'rgba(168,132,98,0.11)');
+    sg.addColorStop(1,    'rgba(6,4,2,0)');
+    bgX.fillStyle = sg; bgX.fillRect(0, 0, W, H);
+
+    // City skyline
+    bgX.fillStyle = '#060402';
+    [[0.02,0.42,0.06,0.28],[0.09,0.55,0.04,0.15],[0.14,0.30,0.08,0.40],
+     [0.23,0.58,0.06,0.12],[0.30,0.24,0.10,0.46],[0.41,0.46,0.05,0.24],
+     [0.47,0.20,0.10,0.50],[0.58,0.48,0.06,0.22],[0.65,0.34,0.07,0.36],
+     [0.73,0.56,0.07,0.14],[0.81,0.42,0.08,0.28],[0.90,0.52,0.06,0.18]
+    ].forEach(([x,t,w,h]) => {
+      bgX.fillRect(x*W, t*H, w*W, h*H);
+    });
+    bgX.fillRect(0, gY, W, H - gY);
+
+    // Figure silhouette
+    const fx = W * 0.5, fh = H * 0.10;
+    bgX.fillStyle = '#040301';
+    bgX.fillRect(fx - 3, gY - fh, 6, fh * 0.70);
+    bgX.beginPath(); bgX.arc(fx, gY - fh, 6.5, 0, Math.PI * 2); bgX.fill();
+    bgX.restore();
+  }
+
+  // ── STAIRCASE CANVAS ──
+  let stairOp   = 0;
+  let stairProg = 0;
+  let stairLit  = false;
+
+  const STEP_WORDS = [
+    'LOSS','DOUBT','FEAR','MISSED ENTRY','STOP LOSS',
+    'FAILURE','OVERTRADING','REVENGE TRADE',
+    'MISSED OPPORTUNITY','AGAIN','RESET','REPEAT',
+  ];
+
+  function loopStair() {
+    stX.clearRect(0, 0, $st.width, $st.height);
+
+    if (stairOp > 0.01) {
+      const W = $st.width, H = $st.height;
+      const cx = W / 2, vanY = H * 0.14, baseY = H * 0.96;
+
+      for (let i = 101; i >= 0; i--) {
+        const t = i / 101;
+        const adj = t + stairProg * 0.80;
+        if (adj > 1.03) continue;
+        const tc = Math.min(adj, 1);
+        const y  = vanY + (baseY - vanY) * Math.pow(tc, 0.57);
+        const sw = W * 0.04 + W * 0.54 * Math.pow(tc, 0.70);
+        const sh = 1 + 22 * Math.pow(tc, 0.80);
+
+        let bright = 0;
+        if (stairLit) {
+          bright = 0.28 + (1 - t) * 0.48;
+        } else if (i === 0 && stairProg > 0.88) {
+          bright = 1.4;
+        } else {
+          bright = 0.018 + (Math.random() < 0.0025 ? 0.05 : 0);
+        }
+
+        const a = Math.min(1, bright * stairOp);
+
+        if (i === 0 && stairProg > 0.88 && !stairLit) {
+          const gg = stX.createLinearGradient(cx - sw/2, y, cx + sw/2, y + sh);
+          gg.addColorStop(0,   `rgba(168,132,98,${a*0.65})`);
+          gg.addColorStop(0.5, `rgba(237,224,206,${a})`);
+          gg.addColorStop(1,   `rgba(104,74,46,${a*0.35})`);
+          stX.fillStyle = gg;
+          stX.shadowBlur = 90; stX.shadowColor = `rgba(237,224,206,${a*0.9})`;
+        } else if (stairLit) {
+          const br = Math.floor(bright * 85);
+          stX.fillStyle = `rgba(${br},${Math.floor(br*0.68)},${Math.floor(br*0.36)},${stairOp})`;
+        } else {
+          const br = Math.floor(bright * 55);
+          stX.fillStyle = `rgba(${br},${Math.floor(br*0.68)},${Math.floor(br*0.35)},${stairOp*0.95})`;
+        }
+
+        stX.fillRect(cx - sw/2, y, sw, Math.max(1, sh));
+        stX.shadowBlur = 0;
+
+        // Step lip rim light
+        stX.fillStyle = `rgba(168,132,98,${a*0.10})`;
+        stX.fillRect(cx - sw/2, y, sw, 0.8);
+
+        // Step words
+        if (i > 0 && i < 101 && adj > 0.07 && adj < 0.94) {
+          const wa = stairLit ? 0.20 : 0.055;
+          const fs2 = Math.max(4.5, sh * 0.58);
+          stX.font = `300 ${fs2}px 'Cormorant Garamond',serif`;
+          stX.fillStyle = `rgba(85,60,38,${wa * stairOp})`;
+          stX.textAlign = 'center';
+          stX.fillText(STEP_WORDS[i % STEP_WORDS.length], cx, y + sh - 0.8);
+        }
+      }
+
+      // Fog cap
+      const fog = stX.createLinearGradient(0, 0, 0, H * 0.44);
+      fog.addColorStop(0, `rgba(6,4,2,${stairOp})`);
+      fog.addColorStop(1, 'rgba(6,4,2,0)');
+      stX.fillStyle = fog; stX.fillRect(0, 0, W, H * 0.44);
+
+      // Light glow at vanishing point
+      if (stairProg > 0.20) {
+        const glA = ((stairProg - 0.20) / 0.80) * 0.44 * stairOp;
+        const rg = stX.createRadialGradient(cx, vanY + 22, 0, cx, vanY + 22, 160);
+        rg.addColorStop(0,   `rgba(237,224,206,${glA})`);
+        rg.addColorStop(0.4, `rgba(168,132,98,${glA*0.45})`);
+        rg.addColorStop(1,   'rgba(6,4,2,0)');
+        stX.fillStyle = rg; stX.fillRect(cx - 160, vanY - 25, 320, 185);
+      }
+    }
+
+    requestAnimationFrame(loopStair);
+  }
+
+  // ── FLUID ANIMATION UTILS ──
+  function sleep(ms) {
+    return new Promise(r => {
+      function check() { if (!isPaused) return r(); setTimeout(check, 60); }
+      setTimeout(check, ms);
+    });
+  }
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const eio  = t => t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t;
+  const eo3  = t => 1 - Math.pow(1 - t, 3);
+  const ei3  = t => t * t * t;
+
+  function animProp(setter, from, to, ms, ease = t => t) {
+    return new Promise(r => {
+      const s = performance.now();
+      function tick(n) {
+        const t = Math.min(1, (n - s) / ms);
+        setter(lerp(from, to, ease(t)));
+        t < 1 ? requestAnimationFrame(tick) : r();
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  function fadeTo(op, ms = 1200) {
+    return new Promise(r => gsap.to($fade, { opacity: op, duration: ms/1000, ease: 'power2.inOut', onComplete: r }));
+  }
+  const fadeIn  = (ms = 1200) => fadeTo(0, ms);
+  const fadeOut = (ms = 1200) => fadeTo(1, ms);
+
+  // ── CRISP, POIGNANT TEXT DISPLAY ──
+  function showLine(html, cls, visMs, delayMs = 0) {
+    return new Promise(r => {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.className = 'line ' + cls;
+        el.innerHTML = html;
+        $ts.appendChild(el);
+        gsap.to(el, { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out' });
+        setTimeout(() => {
+          gsap.to(el, {
+            opacity: 0, duration: 1.2, ease: 'power2.inOut',
+            onComplete: () => { el.remove(); r(); }
+          });
+        }, visMs - 1200);
+      }, delayMs);
+    });
+  }
+
+  function clearLines(fast = false) {
+    document.querySelectorAll('.line').forEach(el => {
+      gsap.to(el, { opacity: 0, duration: fast ? 0.3 : 0.8, onComplete: () => el.remove() });
+    });
+  }
+
+  // ── IMAGE MEMORIES ──
+  function showImage(src, visMs, delayMs = 0) {
+    return new Promise(r => {
+      setTimeout(() => {
+        const img = document.createElement('img');
+        img.className = 'mem-img'; img.src = src; img.alt = '';
+        $mem.appendChild(img);
+        gsap.fromTo(img,
+          { opacity: 0, scale: 1.0 },
+          { opacity: 0.9, scale: 1.035, duration: 1.6, ease: 'power2.out' }
+        );
+        setTimeout(() => {
+          gsap.to(img, {
+            opacity: 0, duration: 1.8, ease: 'power2.inOut',
+            onComplete: () => { img.remove(); r(); }
+          });
+        }, visMs - 1800);
+      }, delayMs);
+    });
+  }
+
+  // ── PROGRESS TRACKER ──
+  const TOTAL_S = 210; // ~3.5 min fluid cinematic cut
+  let filmStart = null;
+  setInterval(() => {
+    if (!filmStart) return;
+    $progFill.style.width = Math.min(100, ((Date.now() - filmStart) / 1000 / TOTAL_S) * 100) + '%';
+  }, 400);
+
+  // ── IMAGE PATHS ──
+  const IMG = {
     rollsNight:        'images/rolls-night.jpg',
     forexWorld:        'images/forex-world.jpg',
     ifYouQuit:         'images/if-you-quit.jpg',
@@ -935,391 +781,344 @@ html, body {
   };
 
   // ══════════════════════════════════════════════════════
-  //  ★  T H E   F I L M  ★
+  //  ★  C I N E M A T I C   F I L M   E N G I N E  ★
+  //  Synced to Ludovico Einaudi - Experience
   // ══════════════════════════════════════════════════════
-  async function film(){
-    filmStart=Date.now();
-    try{ initAudio(); } catch(e){
-      document.addEventListener('click',initAudio,{once:true});
-    }
+  async function film() {
+    filmStart = Date.now();
     requestAnimationFrame(loopBG);
     requestAnimationFrame(loopStair);
     loopDust();
 
     // ─────────────────────────────────────────
-    //  I. DARKNESS
-    //  Only dust. A distant warmth. Nothing else.
+    //  I. DARKNESS & OPENING PIANO (0:00 - 0:35)
     // ─────────────────────────────────────────
-    $fade.style.opacity='1'; dustMult=0.45;
+    $fade.style.opacity = '1'; dustMult = 0.4;
+    await sleep(1500);
+    await fadeIn(2200);
+    await sleep(1000);
 
-    await sleep(2500);
-    await fadeIn(4000);
-    await sleep(2500);
-
-    await showLine('Let me ask you something…', 'voice', 5800);
-    await sleep(2000);
+    await showLine('Let me ask you something…', 'voice', 3600);
+    await sleep(600);
 
     await showLine(
       'If you knew it would take you a hundred times to fail…<br>and stand up on the hundred and first…',
-      'voice', 8500
+      'voice', 4800
     );
-    await sleep(5000);
+    await sleep(800);
 
-    await showLine('How many times would you be willing to try again?', 'voice', 6500);
-    await sleep(4000);
+    await showLine('How many times would you be willing to try again?', 'voice', 3800);
+    await sleep(800);
 
-    showImage(IMG.rollsNight, 10000);
-    await sleep(1500);
-
-    await showLine('Would you stop at ten?', 'voice', 4500);
-    await sleep(2800);
-    await showLine('Twenty?',                'voice', 3500);
-    await sleep(2200);
-    await showLine('Fifty?',                 'voice', 3500);
-    await sleep(3000);
-
-    // ─────────────────────────────────────────
-    //  II. 101 EMERGES
-    // ─────────────────────────────────────────
-    setLevel(0.28); dustMult=1.2;
-
-    showImage(IMG.forexWorld, 11000);
+    showImage(IMG.rollsNight, 5500);
     await sleep(600);
 
-    await animProp(v=>s101Alpha=v, 0,1, 7500, eio);
-    await sleep(3000);
-    await showLine('101', 't101', 6500);
-    await sleep(3200);
-
-    await animProp(v=>camZoom=v, 0,0.36, 10000, eio);
-    await sleep(1500);
-    await showLine('The number that changes everything.', 'voice-plain', 5800);
-    await sleep(4500);
-
-    // ─────────────────────────────────────────
-    //  III. PASS THROUGH 101
-    // ─────────────────────────────────────────
-    await Promise.all([
-      animProp(v=>camZoom=v,  0.36,2.0, 5000, ei3),
-      animProp(v=>camOffX=v,  0,-window.innerWidth*0.52, 5000, ei3),
-      animProp(v=>s101Alpha=v, 1,0, 3800, t=>t*t),
-    ]);
-    camZoom=0; camOffX=0;
-
-    // ─────────────────────────────────────────
-    //  IV. THE STAIRCASE
-    // ─────────────────────────────────────────
-    await fadeOut(1400);
-    s101Alpha=0; stairOp=0; stairProg=0;
+    await showLine('Would you stop at ten?', 'voice', 2200);
     await sleep(400);
-    await fadeIn(2800);
-
-    setLevel(0.40);
-    showImage(IMG.staircaseLight, 12000);
+    await showLine('Twenty?',                'voice', 1800);
+    await sleep(300);
+    await showLine('Fifty?',                 'voice', 2000);
     await sleep(600);
 
-    await animProp(v=>stairOp=v, 0,1, 3800, eo3);
-    await sleep(1500);
+    // ─────────────────────────────────────────
+    //  II. 101 EMERGES (0:35 - 1:05)
+    // ─────────────────────────────────────────
+    dustMult = 1.0;
+    showImage(IMG.forexWorld, 6500);
+    await sleep(400);
 
-    await showLine('There is a staircase.', 'voice', 5200);
-    await sleep(3500);
-    await showLine('You cannot see where it ends.', 'voice', 5200);
-    await sleep(3800);
-
-    animProp(v=>stairProg=v, 0,0.19, 16000, t=>t);
-    await sleep(2000);
-
-    await showLine('You will miss trades.',    'voice', 4500); await sleep(3000);
-    await showLine('You will take losses.',    'voice', 4500); await sleep(3000);
-    await showLine('You will enter too early.','voice', 4500); await sleep(3000);
-    await showLine('You will exit too soon.',  'voice', 4800); await sleep(3500);
-
-    showImage(IMG.ifYouQuit, 10000);
-    await sleep(1500);
-
-    await showLine('Sometimes the market will move without you.',  'voice', 6000); await sleep(4200);
-    await showLine('And sometimes…',                               'voice', 3500); await sleep(2200);
-    await showLine('…you will be the reason you lose.',            'voice', 6000); await sleep(4500);
-
-    animProp(v=>stairProg=v, 0.19,0.34, 13000, t=>t);
+    await animProp(v => s101Alpha = v, 0, 1, 3800, eio);
+    await sleep(800);
+    await showLine('101', 't101', 3600);
     await sleep(600);
 
-    await showLine('But none of that means you are finished.', 'voice-plain', 7500);
-    await sleep(6200);
+    await animProp(v => camZoom = v, 0, 0.36, 4200, eio);
+    await sleep(400);
+    await showLine('The number that changes everything.', 'voice-plain', 3400);
+    await sleep(800);
+
+    // Pass through 101
+    await Promise.all([
+      animProp(v => camZoom = v, 0.36, 2.0, 2600, ei3),
+      animProp(v => camOffX = v, 0, -window.innerWidth * 0.52, 2600, ei3),
+      animProp(v => s101Alpha = v, 1, 0, 2000, t => t*t),
+    ]);
+    camZoom = 0; camOffX = 0;
 
     // ─────────────────────────────────────────
-    //  V. DISCIPLINE
+    //  III. THE STAIRCASE (1:05 - 1:45)
     // ─────────────────────────────────────────
-    showImage(IMG.focusPatience, 11000);
-    await sleep(1500);
+    await fadeOut(800);
+    s101Alpha = 0; stairOp = 0; stairProg = 0;
+    await sleep(250);
+    await fadeIn(1400);
 
-    await showLine('Not every move is yours to take.',           'voice', 5500); await sleep(3800);
-    await showLine('You don\'t have to catch every move.',       'voice', 5500); await sleep(3800);
-    await showLine('You only need to be ready for yours.',       'voice', 6000); await sleep(4300);
-    await showLine('Discipline is knowing when not to trade.',   'voice', 7000); await sleep(5800);
+    showImage(IMG.staircaseLight, 6500);
+    await animProp(v => stairOp = v, 0, 1, 2200, eo3);
+    await sleep(600);
+
+    await showLine('There is a staircase.', 'voice', 2800);
+    await sleep(400);
+    await showLine('You cannot see where it ends.', 'voice', 3000);
+    await sleep(500);
+
+    animProp(v => stairProg = v, 0, 0.22, 9000, t => t);
+
+    await showLine('You will miss trades.',    'voice', 2200); await sleep(300);
+    await showLine('You will take losses.',    'voice', 2200); await sleep(300);
+    await showLine('You will enter too early.','voice', 2200); await sleep(300);
+    await showLine('You will exit too soon.',  'voice', 2400); await sleep(400);
+
+    showImage(IMG.ifYouQuit, 6000);
+    await sleep(600);
+
+    await showLine('Sometimes the market will move without you.', 'voice', 3200); await sleep(400);
+    await showLine('And sometimes…',                              'voice', 2000); await sleep(300);
+    await showLine('…you will be the reason you lose.',           'voice', 3200); await sleep(500);
+
+    animProp(v => stairProg = v, 0.22, 0.40, 7000, t => t);
+    await sleep(300);
+    await showLine('But none of that means you are finished.', 'voice-plain', 3800);
+    await sleep(600);
 
     // ─────────────────────────────────────────
-    //  VI. THE JOURNEY
+    //  IV. DISCIPLINE & THE WORK (1:45 - 2:20)
     // ─────────────────────────────────────────
-    animProp(v=>stairProg=v, 0.34,0.52, 16000, t=>t);
+    showImage(IMG.focusPatience, 6500);
+    await sleep(600);
 
-    showImage(IMG.disciplineSteps, 12000);
-    await sleep(1500);
+    await showLine('Not every move is yours to take.',         'voice', 2800); await sleep(400);
+    await showLine('You don\'t have to catch every move.',     'voice', 2800); await sleep(400);
+    await showLine('You only need to be ready for yours.',     'voice', 3000); await sleep(400);
+    await showLine('Discipline is knowing when not to trade.', 'voice', 3400); await sleep(600);
+
+    animProp(v => stairProg = v, 0.40, 0.58, 8000, t => t);
+
+    showImage(IMG.disciplineSteps, 6500);
+    await sleep(600);
 
     await showLine(
       '<em>"The journey is tough.<br>But the view is worth it."</em>',
-      'voice', 8000
+      'voice', 4000
     );
-    await sleep(6500);
+    await sleep(600);
 
-    // ─────────────────────────────────────────
-    //  VII. THE INVISIBLE WORK
-    // ─────────────────────────────────────────
-    showImage(IMG.traderAsleep, 11000);
-    await sleep(1500);
+    showImage(IMG.traderAsleep, 6500);
+    await sleep(600);
 
-    await showLine('Nobody will see most of this.',                              'voice', 5500); await sleep(3800);
-    await showLine('They won\'t see the nights you stayed awake.',               'voice', 6000); await sleep(4300);
-    await showLine('They won\'t see the charts you studied.',                    'voice', 5500); await sleep(3800);
-    await showLine('They won\'t see the accounts you lost.',                     'voice', 5500); await sleep(3800);
-    await showLine('They won\'t see you sitting there wondering<br>if you\'re actually good enough.', 'voice', 7500); await sleep(6200);
+    await showLine('Nobody will see most of this.',                              'voice', 2800); await sleep(300);
+    await showLine('They won\'t see the nights you stayed awake.',               'voice', 3000); await sleep(300);
+    await showLine('They won\'t see the charts you studied.',                    'voice', 2800); await sleep(300);
+    await showLine('They won\'t see the accounts you lost.',                     'voice', 2800); await sleep(300);
+    await showLine('They won\'t see you sitting there wondering<br>if you\'re actually good enough.', 'voice', 4200); await sleep(600);
 
-    await showLine('But you will.', 'voice-plain', 5200); await sleep(4000);
+    await showLine('But you will.', 'voice-plain', 2600); await sleep(400);
     await showLine(
-      'And one day…<br>you\'ll look back and realize…<br>you were becoming the whole time.',
-      'voice', 9500
+      'And one day… you\'ll look back and realize…<br>you were becoming the whole time.',
+      'voice', 4800
     );
-    await sleep(8000);
-
-    animProp(v=>stairProg=v, 0.52,0.68, 15000, t=>t);
+    await sleep(800);
 
     // ─────────────────────────────────────────
-    //  VIII. THE DARKEST MOMENT
-    //  Near silence. Almost alone.
+    //  V. THE DARKEST MOMENT (2:20 - 2:50)
     // ─────────────────────────────────────────
-    setLevel(0.12); dustMult=0.25;
+    dustMult = 0.3;
+    showImage(IMG.fearStrategy, 6000);
+    await sleep(600);
 
-    showImage(IMG.fearStrategy, 10000);
-    await sleep(1500);
+    await showLine('You don\'t need to win every trade.',                    'voice', 2800); await sleep(400);
+    await showLine('You don\'t need to catch every move.',                   'voice', 2800); await sleep(400);
+    await showLine('You only need to be ready when your opportunity comes.', 'voice', 3400); await sleep(600);
 
-    await showLine('You don\'t need to win every trade.',                        'voice', 5500); await sleep(3800);
-    await showLine('You don\'t need to catch every move.',                       'voice', 5500); await sleep(3800);
-    await showLine('You only need to be ready when your opportunity comes.',     'voice', 7000); await sleep(5500);
-
-    showImage(IMG.disciplineEdge, 10000);
-    await sleep(1500);
+    showImage(IMG.disciplineEdge, 6000);
+    await sleep(600);
 
     await showLine(
       'Sometimes discipline is having<br>the strength to do nothing.',
-      'voice', 8000
+      'voice', 3800
     );
-    await sleep(6800);
+    await sleep(800);
 
     // ─────────────────────────────────────────
-    //  IX. THE FIRST LIGHT
-    //  Music rebuilds. Hope appears.
+    //  VI. THE FIRST LIGHT (2:50 - 3:20)
+    //  Strings start swelling!
     // ─────────────────────────────────────────
-    setLevel(0.55); dustMult=1.0;
+    dustMult = 1.0;
+    animProp(v => stairProg = v, 0.58, 0.88, 8000, eio);
 
-    animProp(v=>stairProg=v, 0.68,0.88, 14000, eio);
+    await showLine('So if you have to fall a hundred times…',               'voice', 2800); await sleep(300);
+    await showLine('<em>Fall.</em>',                                         'voice', 1800); await sleep(300);
+    await showLine('If you have to start again a hundred times…',           'voice', 2800); await sleep(300);
+    await showLine('<em>Start.</em>',                                        'voice', 1800); await sleep(300);
+    await showLine('If you have to learn the same lesson<br>until you finally understand it…','voice', 3800); await sleep(400);
+    await showLine('<em>Learn it.</em>',                                     'voice', 2000); await sleep(400);
 
-    await showLine('So if you have to fall a hundred times…',                    'voice', 5500); await sleep(3800);
-    await showLine('<em>Fall.</em>',                                             'voice', 3500); await sleep(2500);
-    await showLine('If you have to start again a hundred times…',                'voice', 5500); await sleep(3800);
-    await showLine('<em>Start.</em>',                                            'voice', 3500); await sleep(2500);
-    await showLine('If you have to learn the same lesson<br>until you finally understand it…','voice', 7000); await sleep(5200);
-    await showLine('<em>Learn it.</em>',                                         'voice', 3800); await sleep(2800);
-
-    await showLine('Just don\'t quit before 101.', 'voice-plain', 9000);
-    await sleep(7800);
+    await showLine('Just don\'t quit before 101.', 'voice-plain', 4200);
+    await sleep(800);
 
     // ─────────────────────────────────────────
-    //  X. THE 101st STEP
-    //  Sacred. Quiet. Golden.
+    //  VII. THE 101st STEP (3:20 - 3:45)
     // ─────────────────────────────────────────
-    setLevel(0.85); dustMult=1.6;
-
-    await animProp(v=>stairProg=v, 0.88,1.0, 9500, eo3);
-    await sleep(2000);
+    dustMult = 1.5;
+    await animProp(v => stairProg = v, 0.88, 1.0, 5000, eo3);
+    await sleep(600);
     clearLines();
-    await sleep(1000);
+    await sleep(400);
 
-    await showLine('101',                        't101',  8000); await sleep(3500);
-    await showLine('Maybe you haven\'t lost.',   'voice', 5200); await sleep(3800);
-    await showLine('Maybe you\'re still becoming.','voice',6000); await sleep(5000);
+    await showLine('101', 't101', 4000);
+    await sleep(400);
+    await showLine('Maybe you haven\'t lost.', 'voice', 2800);
+    await sleep(300);
+    await showLine('Maybe you\'re still becoming.', 'voice', 3200);
+    await sleep(600);
 
     // ─────────────────────────────────────────
-    //  XI. FAITH
+    //  VIII. FAITH & GOD'S PLAN (3:45 - 4:10)
     // ─────────────────────────────────────────
-    setLevel(0.95); clearLines();
-
-    showImage(IMG.godsPlan, 14000);
-    await sleep(1500);
+    clearLines();
+    showImage(IMG.godsPlan, 7500);
+    await sleep(600);
 
     await showLine(
       '"I can do all things through Christ<br>who strengthens me."<br>' +
-      '<span style="font-size:0.65em;letter-spacing:0.42em;opacity:0.68">— Philippians 4:13</span>',
-      'scripture', 13000
+      '<span style="font-size:0.65em;letter-spacing:0.42em;opacity:0.75">— Philippians 4:13</span>',
+      'scripture', 5000
     );
-    await sleep(6000);
+    await sleep(800);
 
-    await showLine('And when you don\'t know where<br>your strength is going to come from…','voice',7500); await sleep(5800);
-    await showLine('Remember where you started.',    'voice',       5500); await sleep(4200);
-    await showLine('Start with God.',                'voice-plain', 4800); await sleep(3200);
-    await showLine('Trade with discipline.',         'voice-plain', 4800); await sleep(3200);
-    await showLine('Trust the process.',             'voice-plain', 5200); await sleep(4500);
+    await showLine('And when you don\'t know where your strength will come from…','voice', 3200); await sleep(400);
+    await showLine('Remember where you started.',    'voice',       2600); await sleep(300);
+    await showLine('Start with God.',                'voice-plain', 2200); await sleep(300);
+    await showLine('Trade with discipline.',         'voice-plain', 2200); await sleep(300);
+    await showLine('Trust the process.',             'voice-plain', 2400); await sleep(600);
 
     // ─────────────────────────────────────────
-    //  XII. BREAKTHROUGH — THE HORIZON
+    //  IX. THE HORIZON BREAKTHROUGH (4:10 - 4:35)
+    //  Strings at full crescendo!
     // ─────────────────────────────────────────
-    setLevel(1.0); dustMult=0.45;
+    dustMult = 0.5;
+    await fadeOut(1200); stairOp = 0;
+    await sleep(200);
+    await fadeIn(1800);
 
-    await fadeOut(2800); stairOp=0;
+    await animProp(v => horizAlpha = v, 0, 1, 3000, eo3);
+    showImage(IMG.riskRich, 6000);
+    await sleep(600);
+
+    await showLine('You thought you were climbing toward the money.', 'voice', 3600); await sleep(400);
+    await showLine('You were actually becoming the person<br>capable of building it.', 'voice', 4200); await sleep(800);
+
+    // Luxury flow
+    clearLines();
+    showImage(IMG.rollsJourney, 5500);
     await sleep(400);
-    await fadeIn(4000);
+    await showLine('<em>"Success is a journey, not a destination."</em>', 'voice', 3400); await sleep(500);
 
-    await animProp(v=>horizAlpha=v, 0,1, 5000, eo3);
+    showImage(IMG.disciplineFreedom, 5500);
+    await sleep(400);
+    await showLine('Discipline today. Freedom tomorrow.', 'voice', 3200); await sleep(500);
 
-    showImage(IMG.riskRich, 10000);
-    await sleep(1500);
+    showImage(IMG.vitaminM, 5500);
+    await sleep(400);
+    await showLine('The life you\'re building is real. Keep building.', 'voice', 3200); await sleep(500);
 
-    await showLine('You thought you were climbing toward the money.',            'voice',7500); await sleep(5800);
-    await showLine('You were actually becoming the person<br>capable of building it.','voice',8000); await sleep(6800);
-
-    // ─────────────────────────────────────────
-    //  XIII. THE LUXURY — QUIET ASPIRATION
-    //  Not loud. Not flashy. Whispered possibility.
-    // ─────────────────────────────────────────
-    clearLines(); await sleep(1000);
-
-    showImage(IMG.rollsJourney, 10000);
-    await sleep(1200);
-    await showLine('<em>"Success is a journey,<br>not a destination."</em>', 'voice', 8000); await sleep(7000);
-
-    showImage(IMG.disciplineFreedom, 10000);
-    await sleep(1200);
-    await showLine('Discipline today.<br>Freedom tomorrow.','voice', 7500); await sleep(6500);
-
-    showImage(IMG.vitaminM, 10000);
-    await sleep(1200);
-    await showLine('The life you\'re building is real.<br>Keep building.','voice', 7500); await sleep(6500);
-
-    showImage(IMG.oneDay, 11000);
-    await sleep(1200);
+    showImage(IMG.oneDay, 6000);
+    await sleep(400);
     await showLine(
-      'One day.<br><span style="font-size:0.6em;letter-spacing:0.5em;font-style:normal;opacity:0.72">DISCIPLINE · VISION · EXECUTION</span>',
-      'voice', 9000
+      'One day.<br><span style="font-size:0.6em;letter-spacing:0.5em;font-style:normal;opacity:0.75">DISCIPLINE · VISION · EXECUTION</span>',
+      'voice', 4000
     );
-    await sleep(8000);
+    await sleep(800);
 
-    await animProp(v=>horizAlpha=v, 1,0, 3500, eo3);
-
-    // ─────────────────────────────────────────
-    //  XIV. THE TWIST — ALL STEPS ILLUMINATED
-    // ─────────────────────────────────────────
-    await fadeOut(2500); stairOp=0; stairLit=true; stairProg=0;
-    await sleep(400);
-    await fadeIn(3500);
-
-    await animProp(v=>stairOp=v, 0,1, 3800, eo3);
-    setLevel(0.70); dustMult=1.0;
-
-    await showLine('You thought you were climbing toward the money.',             'voice',7000); await sleep(5500);
-    await showLine('You were actually becoming the person<br>capable of holding it.','voice',8000); await sleep(7000);
+    await animProp(v => horizAlpha = v, 1, 0, 2000, eo3);
 
     // ─────────────────────────────────────────
-    //  XV. MESSAGE TO EVERY TRADER
+    //  X. THE TWIST — ALL STEPS LIT (4:35 - 5:00)
     // ─────────────────────────────────────────
-    setLevel(0.60);
+    await fadeOut(1000); stairOp = 0; stairLit = true; stairProg = 0;
+    await sleep(200);
+    await fadeIn(1600);
 
-    await showLine('To every trader who is tired…',                             'voice',4800); await sleep(3200);
-    await showLine('<em>Keep going.</em>',                                       'voice',4000); await sleep(2800);
-    await showLine('To every trader who just took another loss…',               'voice',5200); await sleep(3500);
-    await showLine('<em>Learn.</em>',                                            'voice',4000); await sleep(2800);
-    await showLine('To the trader who feels like everyone else is ahead…',      'voice',5800); await sleep(4000);
-    await showLine('<em>Keep climbing.</em>',                                    'voice',4000); await sleep(2800);
-    await showLine('To the trader who wants to quit…',                          'voice',5000); await sleep(3800);
-    await showLine('<em>Not yet.</em>',                                          'voice',6500); await sleep(5500);
+    await animProp(v => stairOp = v, 0, 1, 2200, eo3);
+    dustMult = 1.0;
 
-    await showLine('You don\'t know which attempt is going to change your life.','voice',7500); await sleep(6000);
-    await showLine('So don\'t quit before you get there.',                       'voice',7000); await sleep(6000);
+    await showLine('You thought you were climbing toward the money.', 'voice', 3600); await sleep(400);
+    await showLine('You were actually becoming the person<br>capable of holding it.', 'voice', 4200); await sleep(800);
+
+    // Message to every trader
+    await showLine('To every trader who is tired…',       'voice', 2400); await sleep(300);
+    await showLine('<em>Keep going.</em>',                 'voice', 2000); await sleep(300);
+    await showLine('To every trader who took another loss…','voice', 2400); await sleep(300);
+    await showLine('<em>Learn.</em>',                      'voice', 2000); await sleep(300);
+    await showLine('To the trader who feels behind…',      'voice', 2400); await sleep(300);
+    await showLine('<em>Keep climbing.</em>',              'voice', 2000); await sleep(300);
+    await showLine('To the trader who wants to quit…',     'voice', 2600); await sleep(300);
+    await showLine('<em>Not yet.</em>',                    'voice', 3200); await sleep(500);
+
+    await showLine('You don\'t know which attempt is going to change your life.', 'voice', 3600); await sleep(400);
+    await showLine('So don\'t quit before you get there.', 'voice', 3400); await sleep(800);
 
     // ─────────────────────────────────────────
-    //  XVI. FINAL STATEMENT
+    //  XI. THE CLIMAX STATEMENT (5:00 - 5:25)
     // ─────────────────────────────────────────
-    setLevel(1.0); dustMult=1.8;
-
-    await fadeOut(2000); stairOp=0; stairLit=false;
-    await sleep(350);
-    await fadeIn(2500);
-    clearLines(); await sleep(600);
+    dustMult = 1.8;
+    await fadeOut(1000); stairOp = 0; stairLit = false;
+    await sleep(200);
+    await fadeIn(1400);
+    clearLines();
 
     await showLine(
       'IF YOU REFUSE TO GIVE UP,<br>YOU WILL EVENTUALLY BE SOMEWHERE.',
-      'statement', 11000
+      'statement', 5500
     );
-    await sleep(10000);
+    await sleep(800);
 
-    await showLine('KEEP GOING.', 'climax', 9000); await sleep(8000);
-    await showLine('UNTIL 101.',  'climax', 8000); await sleep(7000);
+    await showLine('KEEP GOING.', 'climax', 4000); await sleep(600);
+    await showLine('UNTIL 101.',  'climax', 4000); await sleep(600);
 
     // Final 101 monument
-    clearLines(); await sleep(1200);
-    setLevel(0.50);
-
-    await animProp(v=>s101Alpha=v, 0,1, 5000, eio);
-    await sleep(7000);
-    await animProp(v=>s101Alpha=v, 1,0, 8000, eio);
+    clearLines();
+    await animProp(v => s101Alpha = v, 0, 1, 2600, eio);
     await sleep(2500);
+    await animProp(v => s101Alpha = v, 1, 0, 3200, eio);
+    await sleep(800);
 
     // ─────────────────────────────────────────
-    //  XVII. THE FINAL TRADER MESSAGE
-    //  Quiet. Personal. Like a letter.
+    //  XII. THE FINAL TRADER MESSAGE
     // ─────────────────────────────────────────
-    clearLines(); await sleep(1000);
-    setLevel(0.22); dustMult=0.65;
+    clearLines();
+    dustMult = 0.5;
 
-    for(const [html,cls] of [
-      ['Trading isn\'t about never losing.','voice'],
-      ['It is about refusing to let one loss<br>become the end of your story.','voice'],
-      ['<em>Learn.</em>','voice'],
-      ['<em>Adapt.</em>','voice'],
-      ['<em>Wait.</em>','voice'],
-      ['<em>Pray.</em>','voice'],
-      ['<em>Study.</em>','voice'],
-      ['Protect your capital.','voice'],
-      ['Control your emotions.','voice'],
-      ['Take the trades that belong to you.','voice'],
-      ['Leave the ones that don\'t.','voice'],
-      ['Start with God.','voice-plain'],
-      ['Trade with discipline.','voice-plain'],
-      ['Trust the process.','voice-plain'],
-    ]){
-      await showLine(html,cls,5500);
-      await sleep(3500);
+    for (const [html, cls] of [
+      ['Trading isn\'t about never losing.', 'voice'],
+      ['It is about refusing to let one loss<br>become the end of your story.', 'voice'],
+      ['<em>Learn. Adapt. Wait. Pray. Study.</em>', 'voice'],
+      ['Protect your capital. Control your emotions.', 'voice'],
+      ['Take the trades that belong to you.<br>Leave the ones that don\'t.', 'voice'],
+      ['Start with God.', 'voice-plain'],
+      ['Trade with discipline.', 'voice-plain'],
+      ['Trust the process.', 'voice-plain'],
+    ]) {
+      await showLine(html, cls, 3000);
+      await sleep(300);
     }
 
-    // ─────────────────────────────────────────
-    //  FINALE — 101 returns, then fades forever
-    // ─────────────────────────────────────────
-    setLevel(0.62); clearLines(); await sleep(1200);
+    // Final 101 farewell
+    clearLines();
+    await animProp(v => s101Alpha = v, 0, 1, 2400, eio);
+    await sleep(4000);
 
-    await animProp(v=>s101Alpha=v, 0,1, 4000, eio);
-    await sleep(11000);
-
-    setLevel(0);
     await Promise.all([
-      fadeOut(9000),
-      animProp(v=>s101Alpha=v, 1,0, 9000, eio),
-      (async()=>{ await sleep(3000); dustMult=0; })(),
+      fadeOut(4000),
+      animProp(v => s101Alpha = v, 1, 0, 4000, eio),
+      gsap.to($bgm, { volume: 0, duration: 4, ease: 'power2.inOut' }),
     ]);
 
-    await sleep(5000);
-    location.reload(); // loop gently
+    await sleep(2000);
+    location.reload();
   }
 
-  // ── BOOT ────────────────────────────────────────────────
-  initDust();
+  // ── INIT ──
   film();
 
 })();
